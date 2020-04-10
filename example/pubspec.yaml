@@ -1,0 +1,24 @@
+name: auth0_native_example
+description: Demonstrates how to use the auth0_native plugin.
+publish_to: 'none'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  native_resource:
+    git: https://github.com/ened/flutter_plugin_native_resource.git
+
+  auth0_native:
+    path: ../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+environment:
+  sdk: ">=2.3.0 <3.0.0"
+  flutter: ">=1.12.13+hotfix.6 <2.0.0"
+  
