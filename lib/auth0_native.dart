@@ -21,9 +21,13 @@ class Auth0Native {
 
   @visibleForTesting
   Auth0Native.private(this._methodChannel, EventChannel eventChannel)
-      : observeCredentials = eventChannel
-            .receiveBroadcastStream()
-            .map((event) => Map<String, dynamic>.from(event));
+      : observeCredentials = eventChannel.receiveBroadcastStream().map((event) {
+          if (event != null) {
+            return Map<String, dynamic>.from(event);
+          } else {
+            return null;
+          }
+        });
 
   final MethodChannel _methodChannel;
 
@@ -50,11 +54,13 @@ class Auth0Native {
 
     /// Will default to `null` which shows the login page.
     String connection,
+    String scope,
   }) async {
     return await _methodChannel.invokeMapMethod<String, dynamic>('login', {
       'audience': audience,
       'connection': connection,
       'scheme': scheme,
+      'scope': scope,
     });
   }
 

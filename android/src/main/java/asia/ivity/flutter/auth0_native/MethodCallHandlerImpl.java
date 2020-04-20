@@ -128,6 +128,11 @@ public class MethodCallHandlerImpl implements MethodCallHandler {
       builder = builder.withScheme(scheme);
     }
 
+    final String scope = call.argument("scope");
+    if (scope != null) {
+      builder = builder.withScope(scope);
+    }
+
     builder.start(
         activity,
         new AuthCallback() {

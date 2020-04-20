@@ -92,6 +92,10 @@ public class SwiftAuth0NativePlugin: NSObject, FlutterPlugin {
             webAuth = webAuth.connection(connection)
         }
         
+        if let scope = map["scope"] as? String {
+            webAuth = webAuth.scope(scope)
+        }
+
         webAuth.start { (auth0Result) in
             switch auth0Result {
             case .success(result: let c):
@@ -167,7 +171,7 @@ public class SwiftAuth0NativePlugin: NSObject, FlutterPlugin {
         
         let audience = map["audience"] as? String
         let scope = map["scope"] as? String
-        let parameters = map["scope"] as? [String:Any] ?? [:]
+        let parameters = map["parameters"] as? [String:Any] ?? [:]
         
         Auth0.authentication()
             .logging(enabled: self.loggingEnabled)
@@ -196,7 +200,7 @@ public class SwiftAuth0NativePlugin: NSObject, FlutterPlugin {
                 return
         }
         
-        let parameters = map["scope"] as? [String:Any] ?? [:]
+        let parameters = map["parameters"] as? [String:Any] ?? [:]
         
         Auth0.authentication()
             .logging(enabled: self.loggingEnabled)
