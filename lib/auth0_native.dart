@@ -55,12 +55,14 @@ class Auth0Native {
     /// Will default to `null` which shows the login page.
     String connection,
     String scope,
+    Map<String, String> parameters,
   }) async {
     return await _methodChannel.invokeMapMethod<String, dynamic>('login', {
       'audience': audience,
       'connection': connection,
       'scheme': scheme,
       'scope': scope,
+      'parameters': parameters,
     });
   }
 

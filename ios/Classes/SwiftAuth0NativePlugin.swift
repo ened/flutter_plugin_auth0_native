@@ -96,6 +96,10 @@ public class SwiftAuth0NativePlugin: NSObject, FlutterPlugin {
             webAuth = webAuth.scope(scope)
         }
 
+        if let parameters = map["parameters"] as? [String:String] {
+            webAuth = webAuth.parameters(parameters)
+        }
+
         webAuth.start { (auth0Result) in
             switch auth0Result {
             case .success(result: let c):

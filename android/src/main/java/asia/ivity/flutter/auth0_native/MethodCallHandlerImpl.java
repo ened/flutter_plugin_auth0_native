@@ -133,6 +133,11 @@ public class MethodCallHandlerImpl implements MethodCallHandler {
       builder = builder.withScope(scope);
     }
 
+    final Map<String, Object> parameters = call.argument("parameters");
+    if (parameters != null) {
+      builder = builder.withParameters(parameters);
+    }
+
     builder.start(
         activity,
         new AuthCallback() {
