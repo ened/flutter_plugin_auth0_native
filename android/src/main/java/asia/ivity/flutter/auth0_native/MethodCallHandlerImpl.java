@@ -12,6 +12,7 @@ import com.auth0.android.Auth0Exception;
 import com.auth0.android.authentication.AuthenticationAPIClient;
 import com.auth0.android.authentication.AuthenticationException;
 import com.auth0.android.authentication.PasswordlessType;
+import com.auth0.android.authentication.storage.CredentialsManagerException;
 import com.auth0.android.authentication.storage.SecureCredentialsManager;
 import com.auth0.android.authentication.storage.SharedPreferencesStorage;
 import com.auth0.android.callback.BaseCallback;
@@ -61,6 +62,9 @@ public class MethodCallHandlerImpl implements MethodCallHandler {
         break;
       case "logout":
         handleLogout(call, result);
+        break;
+      case "getCredentials":
+        handleGetCredentials(result);
         break;
       case "hasCredentials":
         handleHasCredentials(result);
@@ -190,6 +194,21 @@ public class MethodCallHandlerImpl implements MethodCallHandler {
         });
   }
 
+  private void handleGetCredentials(final Result result) {
+    credentialsManager.getCredentials(
+        new BaseCallback<Credentials, CredentialsManagerException>() {
+          @Override
+          public void onSuccess(Credentials payload) {
+            mainThreadHandler.post(() -> result.success(Mappers.mapCredentials(payload)));
+          }
+
+          @Override
+          public void onFailure(CredentialsManagerException error) {
+            mainThreadHandler.post(() -> result.error("failed-exception", error.getMessage(), ""));
+          }
+        });
+  }
+
   private void handleHasCredentials(final Result result) {
     result.success(credentialsManager.hasValidCredentials());
   }
@@ -259,6 +278,8 @@ public class MethodCallHandlerImpl implements MethodCallHandler {
 
     ParameterizableRequest<Void, AuthenticationException> request =
         apiClient.passwordlessWithEmail(email, type, connection);
+
+    request.addHeader("Accept-Language", "de");
 
     request.start(
         new BaseCallback<Void, AuthenticationException>() {

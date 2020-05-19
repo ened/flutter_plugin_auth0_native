@@ -31,6 +31,11 @@ class Auth0Native {
 
   final MethodChannel _methodChannel;
 
+  /// Retrieve the current login credentials.
+  Future<Map<String, dynamic>> get currentCredentials {
+    return _methodChannel.invokeMapMethod('getCredentials');
+  }
+
   /// Observe the credentials as they pass through the system.
   final Stream<Map<String, dynamic>> observeCredentials;
 
