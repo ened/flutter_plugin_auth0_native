@@ -30,6 +30,9 @@ public class SwiftAuth0NativePlugin: NSObject, FlutterPlugin {
         case "logout":
             handleLogout(call, result)
             break
+        case "getCredentials":
+            handleGetCredentials(result)
+            break
         case "hasCredentials":
             handleHasCredentials(result)
             break
@@ -129,6 +132,22 @@ public class SwiftAuth0NativePlugin: NSObject, FlutterPlugin {
             self.credentialsManager?.clear()
             result(nil)
         }
+    }
+    
+    private func handleGetCredentials(_ result: @escaping FlutterResult) {
+        guard let manager = credentialsManager else {
+            result(nil)
+            return
+        }
+        manager.credentials(callback: { (error, credentials) in
+            if let credentials = credentials {
+                result(mapCredentials(credentials))
+            } else if let error = error {
+                result(mapError(error))
+            } else {
+                result(nil)
+            }
+        })
     }
     
     private func handleHasCredentials(_ result: @escaping FlutterResult) {
