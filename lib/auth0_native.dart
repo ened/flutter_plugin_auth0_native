@@ -103,6 +103,7 @@ class Auth0Native {
     String connection,
     String audience,
     String scope,
+    String device,
     Map<String, dynamic> parameters,
   }) async {
     return await _methodChannel
@@ -112,6 +113,7 @@ class Auth0Native {
       'connection': connection,
       'audience': audience,
       'scope': scope,
+      'device': device,
       'parameters': parameters,
     });
   }
@@ -134,6 +136,7 @@ class Auth0Native {
     String connection,
     String audience,
     String scope,
+    String device,
     Map<String, dynamic> parameters,
   }) async {
     return await _methodChannel
@@ -143,6 +146,7 @@ class Auth0Native {
       'connection': connection,
       'audience': audience,
       'scope': scope,
+      'device': device,
       'parameters': parameters,
     });
   }

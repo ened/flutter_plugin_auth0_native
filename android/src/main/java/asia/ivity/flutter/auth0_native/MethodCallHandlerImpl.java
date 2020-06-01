@@ -254,6 +254,10 @@ public class MethodCallHandlerImpl implements MethodCallHandler {
     if (parameters != null) {
       request = request.addAuthenticationParameters(parameters);
     }
+    final String device = call.argument("device");
+    if (device != null) {
+      request.setDevice(device);
+    }
 
     request.start(
         new BaseCallback<Credentials, AuthenticationException>() {
@@ -313,6 +317,10 @@ public class MethodCallHandlerImpl implements MethodCallHandler {
     final Map<String, Object> parameters = call.argument("parameters");
     if (parameters != null) {
       request = request.addAuthenticationParameters(parameters);
+    }
+    final String device = call.argument("device");
+    if (device != null) {
+      request.setDevice(device);
     }
 
     request.start(
