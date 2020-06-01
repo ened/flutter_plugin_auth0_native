@@ -3,15 +3,23 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
+/// Refer to Auth0 documentation for details.
 enum PasswordlessType {
   code,
   androidLink,
   webLink,
 }
 
+/// Singleton class to handle all auth0 related tasks.
+///
+/// The class uses the native Auth0 SDKs under the hood. Refer to the detailed
+/// documentation at https://www.auth0.com for details.
 class Auth0Native {
   static Auth0Native _instance;
 
+  /// Default constructor which initializes or returns a singleton instance.
+  ///
+  /// You must call [initialize] before calling any other methods.
   factory Auth0Native() {
     return _instance ??= Auth0Native.private(
       const MethodChannel('asia.ivity.flutter/auth0_native/methods'),
@@ -39,6 +47,13 @@ class Auth0Native {
   /// Observe the credentials as they pass through the system.
   final Stream<Map<String, dynamic>> observeCredentials;
 
+  /// Utility method which informs whether credentials are available (e.g. the
+  /// user has logged in).
+  Future<bool> hasCredentials() async {
+    return await _methodChannel.invokeMethod<bool>('hasCredentials');
+  }
+
+  /// Required to initialize the SDK once.
   Future<void> initialize(
     String clientId,
     String domain, {
@@ -53,6 +68,7 @@ class Auth0Native {
     });
   }
 
+  /// Starts web auth login with the specified parameters.
   Future<Map<String, dynamic>> login({
     String audience,
     String scheme,
@@ -71,6 +87,7 @@ class Auth0Native {
     });
   }
 
+  /// Logs the current user out.
   Future<void> logout({
     String audience,
     String scheme,
@@ -81,10 +98,9 @@ class Auth0Native {
     });
   }
 
-  Future<bool> hasCredentials() async {
-    return await _methodChannel.invokeMethod<bool>('hasCredentials');
-  }
-
+  /// Initiates a passwordless login flow by sending a SMS with a OTP.
+  ///
+  /// Call [loginWithPhoneNumber] afterwards to confirm the login.
   Future<void> passwordlessWithSMS(
     String phone,
     PasswordlessType type, {
@@ -97,6 +113,7 @@ class Auth0Native {
     });
   }
 
+  /// Logs in the user by phone & OTP as created in [passwordlessWithSMS].
   Future<Map<String, dynamic>> loginWithPhoneNumber(
     String phone,
     String code, {
@@ -118,6 +135,9 @@ class Auth0Native {
     });
   }
 
+  /// Initiates a passwordless login flow by sending a eMail with a OTP.
+  ///
+  /// Call [loginWithEmail] afterwards to confirm the login.
   Future<void> passwordlessWithEmail(
     String email,
     PasswordlessType type, {
@@ -130,6 +150,7 @@ class Auth0Native {
     });
   }
 
+  /// Logs in the user by email & OTP as created in [passwordlessWithEmail].
   Future<Map<String, dynamic>> loginWithEmail(
     String email,
     String code, {
@@ -151,6 +172,7 @@ class Auth0Native {
     });
   }
 
+  /// Attempts a native login via Sign in With Apple. (iOS only).
   Future<Map<String, dynamic>> signInWithApple({
     String audience,
     String scope,

@@ -1,8 +1,7 @@
 name: auth0_native
-description: A new flutter plugin project.
+description: Auth0 integration for Flutter
 version: 0.0.1
-author:
-homepage:
+homepage: https://github.com/ened/flutter_plugin_auth0_native.git
 
 environment:
   sdk: ">=2.3.0 <3.0.0"

@@ -1,16 +1,12 @@
 # auth0_native_example
 
-Demonstrates how to use the auth0_native plugin.
+Please familiarize yourself with the requirements on adding Auth0 to any Android or iOS App.
+Specifically, you will need to configure your Auth0 Client ID & Domain as well as the URL scheme on Android.
 
-## Getting Started
+The example app stores this configuration ONLY in the native side and uses the 'native_resource' plugin to fetch them into the Dart side. From there, the configuration is sent back to the plugin using the 'initialize' method.
 
-This project is a starting point for a Flutter application.
+This is done because the Auth0 configuration needs to be present at **build** time.
 
-A few resources to get you started if this is your first Flutter project:
+For iOS, please configure `ios/Auth0.plist`, for Android it's in `android/app/src/main/res/values/auth0.xml`. These values need to be present and correct in order for the example to work!
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Finally, `lib/main.dart` contains a few constants which should be configured, according to your testing needs, namely `audience` and `connections`. For ease of use, it is recommended to set `demoEmail` & `demoPhone` so that password less login testing is quicker.

@@ -16,7 +16,6 @@ class MyApp extends StatefulWidget {
 }
 
 const String audience = '';
-
 const String demoEmail = '';
 const String demoPhone = '';
 

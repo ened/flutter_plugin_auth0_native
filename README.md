@@ -1,14 +1,11 @@
 # auth0_native
 
-A new flutter plugin project.
+Auth0 integration for Flutter, using the official Auth0 iOS & Android SDKs.
 
-## Getting Started
+This plugin allows for a integration of the Auth0 login system into a Flutter App. 
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+## Note on Native SDK usage
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+The plugin utilizes the native SDKs, written in Java & Swift, under the hood.
+
+This is meant as a easy way to debug problems if they occur. Developers may open this plugins code and find familiar function calls that match the Auth0 documentation.
