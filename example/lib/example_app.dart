@@ -34,11 +34,33 @@ class ExampleApp extends StatelessWidget {
         title: const Text('Plugin example app'),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.exit_to_app),
+            icon: Icon(
+              Icons.exit_to_app,
+              color: Colors.orange,
+            ),
             onPressed: () {
               Auth0Native().hasCredentials().then((value) {
                 if (value) {
-                  Auth0Native().logout(scheme: scheme);
+                  Auth0Native().logout(
+                    scheme: scheme,
+                    localOnly: true,
+                  );
+                }
+              });
+            },
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.exit_to_app,
+              color: Colors.red,
+            ),
+            onPressed: () {
+              Auth0Native().hasCredentials().then((value) {
+                if (value) {
+                  Auth0Native().logout(
+                    scheme: scheme,
+                    localOnly: false,
+                  );
                 }
               });
             },

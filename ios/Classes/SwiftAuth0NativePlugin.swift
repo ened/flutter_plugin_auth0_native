@@ -122,6 +122,14 @@ public class SwiftAuth0NativePlugin: NSObject, FlutterPlugin {
             return
         }
         
+        let localOnly = map["localOnly"] as? Bool ?? false
+        
+        if localOnly {
+            self.credentialsManager?.clear()
+            result(nil)
+            return
+        }
+        
         var webAuth = Auth0.webAuth().logging(enabled: loggingEnabled)
         
         if let audience = map["audience"] as? String {

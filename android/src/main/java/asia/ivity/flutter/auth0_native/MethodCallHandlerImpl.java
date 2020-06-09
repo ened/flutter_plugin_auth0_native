@@ -171,6 +171,14 @@ public class MethodCallHandlerImpl implements MethodCallHandler {
       return;
     }
 
+    final boolean localOnly = call.argument("localOnly");
+
+    if (localOnly) {
+      credentialsManager.clearCredentials();
+      result.success(null);
+      return;
+    }
+
     LogoutBuilder builder = WebAuthProvider.logout(account);
 
     final String scheme = call.argument("scheme");

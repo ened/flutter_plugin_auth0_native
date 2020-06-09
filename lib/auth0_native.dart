@@ -89,10 +89,16 @@ class Auth0Native {
 
   /// Logs the current user out.
   Future<void> logout({
+    /// When set to `true`, the login will only affect the local credentials storage.
+    ///
+    /// Else, it will clear the stored universal login session. This may prompt a
+    /// web view to popup briefly.
+    bool localOnly,
     String audience,
     String scheme,
   }) async {
     await _methodChannel.invokeMethod<void>('logout', {
+      'localOnly': localOnly,
       'audience': audience,
       'scheme': scheme,
     });
