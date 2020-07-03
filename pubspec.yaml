@@ -1,5 +1,5 @@
 name: auth0_native
-description: Auth0 integration for Flutter
+description: This package uses native SDKs (iOS & Android) to facilitate application authorization using Auth0 (Auth0.com).
 version: 0.0.1
 homepage: https://github.com/ened/flutter_plugin_auth0_native.git
 
