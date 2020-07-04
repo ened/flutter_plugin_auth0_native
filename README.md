@@ -113,6 +113,7 @@ dependencies:
             </dict>
         </array>
 
+
     - Update Podfile
         If you are receiving an error about Auth0 requiring a higher minimum version.  Uncomment (#) platform definition.
 
@@ -121,6 +122,20 @@ dependencies:
         # Uncomment this line to define a global platform for your project
         From - #platform :ios, '12.0'
         To - platform :ios, '12.0'
+
+    ----Web---
+    - Add SDK to your index.html file.  This needs to be before the main.dart.js file.
+        // Add these two lines
+        <script src="https://cdn.auth0.com/js/auth0-spa-js/1.9/auth0-spa-js.production.js"></script>
+        <script src="js/app.js"></script>
+        // the main.dart.js file that is created on web build.
+        <script src="main.dart.js" type="application/javascript"></script>
+
+    - Create Credentials file
+
+
+
+
 
 
 4. Initialize Auth0

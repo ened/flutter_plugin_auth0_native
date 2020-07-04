@@ -31,6 +31,9 @@ flutter:
         pluginClass: Auth0NativePlugin
       ios:
         pluginClass: Auth0NativePlugin
+      web:
+        pluginClass: Auth0NativePlugin
+
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
