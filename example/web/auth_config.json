@@ -1,4 +1,6 @@
 {
   "domain": "company.auth0.com",
-  "clientId": "Add Your Client Id"
+  "clientId": "Add Your Client Id",
+  "redirectUri": "https://YOUR_APP/callback",
+  "audience": "YOUR_API_Identifier"
 }

@@ -126,15 +126,22 @@ dependencies:
     ----Web---
     - Add SDK to your index.html file.  This needs to be before the main.dart.js file.
         // Add these two lines
-        <script src="https://cdn.auth0.com/js/auth0-spa-js/1.9/auth0-spa-js.production.js"></script>
-        <script src="js/app.js"></script>
+        <script src="JSAuth0NativePlugin.js"></script>
         // the main.dart.js file that is created on web build.
         <script src="main.dart.js" type="application/javascript"></script>
 
     - Create Credentials file
+       - This file needs to be in the web directory with the index.html file
 
+       {
+         "domain": "company.auth0.com",
+         "clientId": "Add Your Client Id",
+         "redirectUri": "https://YOUR_APP/callback",
+         "audience": "YOUR_API_Identifier"
+       }
 
-
+    NOTE - If you are using the universal login, you will need to handle the callback.  From the Auth0 docs, after the user authenticates, it will redirect to your application callback URL passing the Access Token and ID Token in the address location.hash.
+    NOTE - oidc flag does not work on web. This will use the OIDC compliant flow.
 
 
 
@@ -261,7 +268,7 @@ dependencies:
                       androidLink,
                       webLink,
                     }
-                - connection = this is your Auth0 Domain (company.auth0.com)
+                - connection = Optional - this will default to 'sms'
 
             - Step two
                 - Call loginWithPhoneNumber()
@@ -291,7 +298,7 @@ dependencies:
                 - Parameters
                     phone = same phone number as in passwordlessWithSMS
                     code =  the code sent via SMS
-                    connection = your Auth0 Domain (company.auth0.com)
+                    connection = Optional - this will default to 'sms'
                     audience =  Optional - This other applications (APIs) that you need access too.  This would be the API if your applcation needs a datasource.
                     scope = Optional - this is only necessary if you have scoped defined in Auth0
                     device = Optional - This is for a device specific flow and can be left out.
@@ -321,7 +328,7 @@ dependencies:
                           androidLink,
                           webLink,
                         }
-                    - connection = this is your Auth0 Domain (company.auth0.com)
+                    - connection = Optional - this will default to 'email'
 
             - Step two
                 - call loginWithEmail()
@@ -350,7 +357,7 @@ dependencies:
                 - Parameters
                     email = same email as in passwordlessWithEmail
                     code =  the code sent via SMS
-                    connection = your Auth0 Domain (company.auth0.com)
+                    connection = Optional - this will default to 'email'
                     audience =  Optional - This other applications (APIs) that you need access too.  This would be the API if your applcation needs a datasource.
                     scope = Optional - this is only necessary if you have scoped defined in Auth0
                     device = Optional - This is for a device specific flow and can be left out.
